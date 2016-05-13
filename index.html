@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <!-- Setting the viewport -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        
+        <title>CSV Parsing</title>
+        
+        <!-- style -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <style>
+            body { padding-top: 70px; }
+        </style>
+    </head>
+
+<body ng-app="csvParse" ng-controller="csvParseController">
+    
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">CSV Parser</a>
+            <form class="navbar-form navbar-left" role="search">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Filter">
+                </div>
+            </form>
+            <span>Minimum Date: {{minDate}}.  Maximum Date: {{maxDate}}</span>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h2>What's the Point of this?</h2>
+        <p>The AngularJS app reads in a CSV file, parses the file into a nested array of strings, outputs the contents as a table, and outputs the raw JSON at the bottom.</p>
+
+        <div class="col-xs-12">
+            <h4>Output:</h4>
+            <table class="table">
+                <thead>
+                    <th>Source</th>
+                    <th>Target</th>
+                    <th>Value</th>
+                    <th>Annum</th>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="data in outputData">
+                        <td>{{data.source}}</td>
+                        <td>{{data.target}}</td>
+                        <td>{{data.value}}</td>
+                        <td>{{data.annum | date:medium}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-xs-12">
+            <h4>In the raw...</h4>
+            <pre>{{ outputData | json:4 }}</pre>
+        </div>
+    </div>
+    
+    <!-- scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.js"></script>
+    <script src="app.js"></script>
+        
+</body>
+
+</html>
