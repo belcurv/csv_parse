@@ -1,0 +1,15 @@
+.mdl-card-wide {
+    width: 100%;
+}
+
+.mdl-card__supporting-text {
+    width: auto;
+}
+
+.table-wide {
+    width: 100%;
+}
+
+.date-slider {
+    width: 90%;
+}
