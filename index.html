@@ -48,24 +48,24 @@
 
                         <div class="mdl-card__supporting-text">
                             <p>This simple app reads in a CSV file via XHR, parses the file into a nested array of strings, outputs the contents as a table, and outputs the raw JSON at the bottom.</p>
-                            <p>Date Range: {{minDate | date}} - {{maxDate | date}}</span></p>
                         </div>
                         <div class="mdl-card__actions mdl-card--border">
+                            <p>Date Range: {{minDate | date}} - {{maxDate | date}}</p>
                             <!-- Date Slider -->
-                            <p class="date-slider">Min Date: {{ minDate | date }}
+                            <p class="date-slider">
                                 <span>
                                 <input id="sl1"
                                            class="mdl-slider mdl-js-slider"
-                                           type="range" min="0" max="100"
-                                           value="0" tabindex="0">
+                                           type="range" min="0" max="{{maxDateSlider}}"
+                                           value="0" ng-model="minDateSlider" tabindex="0">
                                 </span>
                             </p>
-                            <p class="date-slider">Max Date: {{ maxDate | date }}
+                            <p class="date-slider">
                                 <span>
                                 <input id="sl2"
                                            class="mdl-slider mdl-js-slider"
-                                           type="range" min="0" max="100"
-                                           value="100" tabindex="1">
+                                           type="range" min="{{minDateSlider}}" max="100"
+                                           value="100" ng-model="maxDateSlider" tabindex="1">
                                 </span>
                             </p>
                             
@@ -98,7 +98,7 @@
                                         <td class="mdl-data-table__cell--non-numeric">{{data.source}}</td>
                                         <td class="mdl-data-table__cell--non-numeric">{{data.target}}</td>
                                         <td>{{data.value}}</td>
-                                        <td>{{data.annum | date:medium}}</td>
+                                        <td>{{data.annum | date}}</td>
                                     </tr>
                                 </tbody>
                             </table>
