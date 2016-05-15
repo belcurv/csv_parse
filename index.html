@@ -15,7 +15,7 @@
 
 </head>
 
-<body ng-app="csvParse" ng-controller="csvParseController as vm">
+<body ng-app="csvParse" ng-controller="csvParseController">
     
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
     <header class="mdl-layout__header">
@@ -48,11 +48,11 @@
 
                         <div class="mdl-card__supporting-text">
                             <p>This simple app reads in a CSV file via XHR, parses the file into a nested array of strings, outputs the contents as a table, and outputs the raw JSON at the bottom.</p>
-                            <p>Date Range: {{vm.minDate | date}} - {{vm.maxDate | date}}</span></p>
+                            <p>Date Range: {{minDate | date}} - {{maxDate | date}}</span></p>
                         </div>
                         <div class="mdl-card__actions mdl-card--border">
                             <!-- Date Slider -->
-                            <p class="date-slider">Min Date: {{ vm.minDate | date }}
+                            <p class="date-slider">Min Date: {{ minDate | date }}
                                 <span>
                                 <input id="sl1"
                                            class="mdl-slider mdl-js-slider"
@@ -60,7 +60,7 @@
                                            value="0" tabindex="0">
                                 </span>
                             </p>
-                            <p class="date-slider">Max Date: {{ vm.maxDate | date }}
+                            <p class="date-slider">Max Date: {{ maxDate | date }}
                                 <span>
                                 <input id="sl2"
                                            class="mdl-slider mdl-js-slider"
@@ -94,7 +94,7 @@
                                     <th>Annum</th>
                                 </thead>
                                 <tbody>
-                                    <tr ng-repeat="data in vm.outputData">
+                                    <tr ng-repeat="data in outputData">
                                         <td class="mdl-data-table__cell--non-numeric">{{data.source}}</td>
                                         <td class="mdl-data-table__cell--non-numeric">{{data.target}}</td>
                                         <td>{{data.value}}</td>
@@ -116,7 +116,7 @@
                         </div>
 
                         <div class="mdl-card__supporting-text">
-                            <pre>{{ vm.outputData | json:4 }}</pre>
+                            <pre>{{ outputData | json:4 }}</pre>
                         </div>
                     </div>
                 </div>
@@ -129,8 +129,9 @@
 <!-- scripts -->
 <script src="js/vendor/angular.js      "></script>
 <script src="js/vendor/material.min.js "></script>
-<script src="js/vendor/papaparse.min.js"></script>
 <script src="js/app.js                 "></script>
+<script src="js/vendor/papaparse.min.js"></script>
+
         
 </body>
 
