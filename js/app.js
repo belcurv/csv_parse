@@ -5,56 +5,58 @@
         
         .module('csvParse', [])
     
+        .value()
+    
         .controller('csvParseController', ['$http', function ($http) {
             
-            var vm = this;
+            var vm = this,
+                results,
+                outputData;
             
             vm.minDate;
             vm.maxDate;
-            vm.parsedData = [];  // init a temp scratch space array
+            vm.outputData = [];
+            
+            // work with the data
+            function doStuff(data) {
+                // Data is usable here
+                vm.outputData = data;
+                console.log('Callback\'s outputData: ' + vm.outputData);
+                console.log('Callback\'s outputData type: ' + typeof vm.outputData);
+            }
             
             // read in the CSV
-            $http.get('data/data.csv')
+            function parseData(url, callBack) {
+                Papa.parse(url, {
+                    download: true,
+                    header: true,
+                    dynamicTyping: true,
+                    skipEmptyLines: true,
+                    complete: function(results) {
+                        callBack(results.data);
+                    }
+                });
+            }
             
-                // on success, trigger function passing CSV as 'response' arg
-                .then(function (response) {
+            parseData('data/data.csv', doStuff);
 
-                    // init some variables we'll need
-                    var i,
-                        lines,
-                        line,
-                        data;
+            console.log('Type of outputData = ' + typeof outputData);
+            console.log('outputData: ' + outputData);
+ //           console.log('Length of outputData: ' + outputData.length);
+            
+            console.log('Type of vm.outputData = ' + typeof vm.outputData);
+            console.log('outputData: ' + vm.outputData);
+            console.log('Length of outputData: ' + vm.outputData.length);
 
-                    // populate the array
-                    lines = response.data.split('\n');                  // split at newline; creates array
 
-                    for (i = lines.length - 1; i >= 0; i -= 1) {   // repeat for as many lines
-
-                        line = lines[i];
-
-                        data = line.split(',');                       // split at commas, creates array
-
-                        vm.parsedData.push({                          // push onto output array
-                            source: data[0],
-                            target: data[1],
-                            value : data[2],
-                            annum : Date.parse(data[3])            // convert date string to js seconds
-                        });
-                        
-                    }   // end for loop
-                
-                    // begin find date ranges                
-                    vm.minDate = Math.min.apply(Math, vm.parsedData.map(function (objMin) {
-                        return objMin.annum;
-                    }));
-
-                    vm.maxDate = Math.max.apply(Math, vm.parsedData.map(function (obj) {
-                        return obj.annum;
-                    }));
-
-                });   // end $http.get().success() function
-
-            vm.outputData = vm.parsedData;
+            // begin find date ranges                
+//            vm.minDate = Math.min.apply(Math, vm.parsedData.map(function (objMin) {
+//                return objMin.annum;
+//            }));
+//
+//            vm.maxDate = Math.max.apply(Math, vm.parsedData.map(function (obj) {
+//                return obj.annum;
+//            }));
 
         }]);   // end controller
 })();
