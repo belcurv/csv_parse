@@ -34,33 +34,71 @@
 
         testFactory.getStuff().then(function (results) {
             
-            var i,
+            $scope.myDate = 0;
+            
+            var i, j, k, l,
+                uniqueDates,
+                dateMatrix,
                 formattedResults = [];
             
-            $scope.minDateSlider = 0;
-            $scope.maxDateSlider = 100;
-            
-            // convert parsed date strings to JS dates (seconds)
+        
+            // ==================== begin type conversion =====================
             for (i = 0; i < results.data.length; i += 1) {
                 formattedResults.push({
-                    source : results.data[i].source,
-                    target : results.data[i].target,
-                    value  : results.data[i].value,
-                    annum  : Date.parse(results.data[i].annum)
+                    source : results.data[i].source,             // stay string
+                    target : results.data[i].target,             // stay string
+                    value  : +results.data[i].value,             // conv number
+                    annum  : Date.parse(results.data[i].annum)   // conv date
                 });
             }
+            // ===================== end type conversion ======================
             
-            // bind formatted data to $scope object
-            $scope.outputData = formattedResults;
+            // =============== begin build array of unique dates ==============
             
-            // find date min/max
-            $scope.minDate = Math.min.apply(Math, formattedResults.map(function (objMin) {
-                return objMin.annum;
+            // add 'contains' method to Array prototype
+            Array.prototype.contains = function (v) {
+                for (j = 0; j < this.length; j += 1) {
+                    if (this[j] === v) {
+                        return true;
+                    }
+                }
+                return false;
+            };
+            
+            // add 'unique' method to Array prototype
+            Array.prototype.unique = function () {
+                var arr = [];
+                for (k = 0; k < this.length; k += 1) {
+                    if (!arr.contains(this[k].annum)) {
+                        arr.push(this[k].annum);
+                    }
+                }
+                return arr;
+            };
+            
+            // find unique dates within formattedResults array
+            uniqueDates = formattedResults.unique().sort();
+            console.log('Unique dates:\n', uniqueDates);   // testing
+            console.log('Unique dates length:', uniqueDates.length);   // testing
+            
+            // find min date within uniqueDates
+            $scope.minDate = Math.min.apply(Math, uniqueDates.map(function (objMin) {
+                return objMin;
             }));
 
-            $scope.maxDate = Math.max.apply(Math, formattedResults.map(function (objMax) {
-                return objMax.annum;
+            // find min date within uniqueDates
+            $scope.maxDate = Math.max.apply(Math, uniqueDates.map(function (objMax) {
+                return objMax;
             }));
+            
+            // ================ end build array of unique dates ===============
+            
+            
+            // ================== bind data to $scope object ==================
+            $scope.outputData = formattedResults;
+            $scope.dateArray  = uniqueDates;
+            $scope.dateLength = uniqueDates.length;
+
             
         });
         
