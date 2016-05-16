@@ -38,7 +38,6 @@
             
             var i, j, k, l,
                 uniqueDates,
-                dateMatrix,
                 formattedResults = [];
             
         
@@ -52,9 +51,9 @@
                 });
             }
             // ===================== end type conversion ======================
-            
+
+
             // =============== begin build array of unique dates ==============
-            
             // add 'contains' method to Array prototype
             Array.prototype.contains = function (v) {
                 for (j = 0; j < this.length; j += 1) {
@@ -77,34 +76,19 @@
             };
             
             // find unique dates within formattedResults array
+            // and sort them, ascending
             uniqueDates = formattedResults.unique().sort();
-            console.log('Unique dates:\n', uniqueDates);   // testing
-            console.log('Unique dates length:', uniqueDates.length);   // testing
-            
-            // find min date within uniqueDates
-            $scope.minDate = Math.min.apply(Math, uniqueDates.map(function (objMin) {
-                return objMin;
-            }));
-
-            // find min date within uniqueDates
-            $scope.maxDate = Math.max.apply(Math, uniqueDates.map(function (objMax) {
-                return objMax;
-            }));
-            
             // ================ end build array of unique dates ===============
-            
-            
+
+
             // ================== bind data to $scope object ==================
             $scope.outputData = formattedResults;
             $scope.dateArray  = uniqueDates;
-            $scope.dateLength = uniqueDates.length;
-
+            $scope.minDate    = uniqueDates[0];
+            $scope.maxDate    = uniqueDates[uniqueDates.length-1];
             
         });
-        
+
     });
-
-
-
     
 })();
