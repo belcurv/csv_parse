@@ -85,10 +85,11 @@
             $scope.outputData = formattedResults;
             $scope.dateArray  = uniqueDates;
             $scope.minDate    = uniqueDates[0];
-            $scope.maxDate    = uniqueDates[uniqueDates.length-1];
+            $scope.maxDate    = uniqueDates[uniqueDates.length - 1];
             
         });
 
     });
-    
+
+
 })();
