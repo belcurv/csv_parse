@@ -100,7 +100,7 @@
                                     <th>Annum</th>
                                 </thead>
                                 <tbody>
-                                    <tr ng-repeat="data in outputData | filter:dateArray[myDate]">
+                                    <tr ng-repeat="data in outputData | filter:dateArray[myDate] | orderBy:'source'">
                                         <td class="mdl-data-table__cell--non-numeric">{{data.source}}</td>
                                         <td class="mdl-data-table__cell--non-numeric">{{data.target}}</td>
                                         <td>{{data.value}}</td>
@@ -122,7 +122,7 @@
                         </div>
 
                         <div class="mdl-card__supporting-text">
-                            <pre>{{ outputData | filter:dateArray[myDate] | json:4 }}</pre>
+                            <pre>{{ outputData | json:4 }}</pre>
                         </div>
                     </div>
                 </div>
