@@ -87,6 +87,8 @@
             $scope.sliderIndex    = 0;
             $scope.sliderIndexMax = uniqueDates.length - 1;
             
+            console.log('sliderIndexMax ' + $scope.sliderIndexMax);
+            
         });
 
     });

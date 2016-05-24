@@ -15,8 +15,8 @@
             <p>
                 <input type="range" id="sl1"
                            class="mdl-slider date-slider"
-                           min="0" max="sliderIndexMax" step="1"
-                           ng-model="sliderIndex">
+                           min="0" max="{{sliderIndexMax}}" step="1"
+                           ng-model="sliderIndex" />
             </p>
             <p>Showing: {{ (outputData|filter:dateArray[sliderIndex]).length }} of {{ outputData.length }} total results:</p>
             <table class="mdl-data-table mdl-js-data-table">

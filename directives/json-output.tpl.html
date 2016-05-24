@@ -1,4 +1,4 @@
-<div id="json" class="mdl-cell mdl-cell--12-col">
+<div id="json" class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet">
     <div class="mdl-card mdl-shadow--4dp mdl-card-wide">
         <div class="mdl-card__title">
             <h3 class="mdl-card__title-text">
@@ -7,7 +7,7 @@
         </div>
 
         <div class="mdl-card__supporting-text">
-            <pre>{{ outputData | json:4 }}</pre>
+            <pre>{{ outputData | filter:dateArray[sliderIndex] | json:4 }}</pre>
         </div>
     </div>
 </div>
