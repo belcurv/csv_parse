@@ -1,0 +1,30 @@
+<div id="table" class="mdl-cell mdl-cell--12-col">
+    <div class="mdl-card mdl-shadow--4dp mdl-card-wide">
+        <div class="mdl-card__title">
+            <h3 class="mdl-card__title-text">
+                Tabular Output:
+            </h3>
+        </div>
+
+        <div class="mdl-card__supporting-text">
+            <table class="mdl-data-table
+                          mdl-js-data-table
+                          table-wide">
+                <thead>
+                    <th class="mdl-data-table__cell--non-numeric">Source</th>
+                    <th class="mdl-data-table__cell--non-numeric">Target</th>
+                    <th>Value</th>
+                    <th>Annum</th>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="data in outputData | filter:dateArray[myDate] | orderBy:'source'">
+                        <td class="mdl-data-table__cell--non-numeric">{{data.source}}</td>
+                        <td class="mdl-data-table__cell--non-numeric">{{data.target}}</td>
+                        <td>{{data.value}}</td>
+                        <td>{{data.annum | date}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

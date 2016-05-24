@@ -41,92 +41,13 @@
             <div class="mdl-grid">
                 
                 <!-- INTRODUCTION -->
-                <div id="top" class="mdl-cell mdl-cell--12-col">
-                    <div class="mdl-card mdl-shadow--4dp mdl-card-wide">
-                        <div class="mdl-card__title">
-                            <h3 class="mdl-card__title-text">
-                                What's the Point of this?
-                            </h3>
-                        </div>
-
-                        <div class="mdl-card__supporting-text">
-                            <p>See the source code on <a href="https://github.com/belcurv/csv_parse" target="_blank">Github</a>.</p>
-                            <p>This app reads in a remote CSV file via XHR, parses the file using Papaparse, formats the results, outputs the contents as a table and raw JSON.  A HTML5 input/range slider is used to filter the results by specific dates.</p>
-                        
-                            <p>Total range of dataset: {{minDate | date}} - {{maxDate | date}}</p>
-                            <p>Drag to filter on specific dates:</p>
-                            <p>
-                                <input type="range" id="sl1"
-                                           class="mdl-slider date-slider"
-                                           min="0" max="{{dateArray.length - 1}}" step="1"
-                                           ng-model="myDate">
-                            </p>
-                            <p>Showing: {{ (outputData|filter:dateArray[myDate]).length }} of {{ outputData.length }} total results:</p>
-                            <table class="mdl-data-table mdl-js-data-table">
-                                <thead>
-                                    <th class="mdl-data-table__cell--non-numeric">Date index</th>
-                                    <th class="mdl-data-table__cell--non-numeric">Javascript Date</th>
-                                    <th class="mdl-data-table__cell--non-numeric">Formatted Date</th>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="mdl-data-table__cell--non-numeric">{{myDate}}</td>
-                                        <td class="mdl-data-table__cell--non-numeric">{{dateArray[myDate]}}</td>
-                                        <td class="mdl-data-table__cell--non-numeric">{{dateArray[myDate] | date}}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-
-                        </div>
-                    </div>
-                </div>
+                <introduction></introduction>
                 
                 <!-- OUTPUT AS TABLE -->
-                <div id="table" class="mdl-cell mdl-cell--12-col">
-                    <div class="mdl-card mdl-shadow--4dp mdl-card-wide">
-                        <div class="mdl-card__title">
-                            <h3 class="mdl-card__title-text">
-                                Tabular Output:
-                            </h3>
-                        </div>
-
-                        <div class="mdl-card__supporting-text">
-                            <table class="mdl-data-table
-                                          mdl-js-data-table
-                                          table-wide">
-                                <thead>
-                                    <th class="mdl-data-table__cell--non-numeric">Source</th>
-                                    <th class="mdl-data-table__cell--non-numeric">Target</th>
-                                    <th>Value</th>
-                                    <th>Annum</th>
-                                </thead>
-                                <tbody>
-                                    <tr ng-repeat="data in outputData | filter:dateArray[myDate] | orderBy:'source'">
-                                        <td class="mdl-data-table__cell--non-numeric">{{data.source}}</td>
-                                        <td class="mdl-data-table__cell--non-numeric">{{data.target}}</td>
-                                        <td>{{data.value}}</td>
-                                        <td>{{data.annum | date}}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+                <tabular-output></tabular-output>
                 
                 <!-- OUTPUT AS JSON -->
-                <div id="json" class="mdl-cell mdl-cell--12-col">
-                    <div class="mdl-card mdl-shadow--4dp mdl-card-wide">
-                        <div class="mdl-card__title">
-                            <h3 class="mdl-card__title-text">
-                                In the raw...
-                            </h3>
-                        </div>
-
-                        <div class="mdl-card__supporting-text">
-                            <pre>{{ outputData | json:4 }}</pre>
-                        </div>
-                    </div>
-                </div>
+                <json-output></json-output>
                 
             </div>
         </div>

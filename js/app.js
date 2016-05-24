@@ -90,6 +90,33 @@
         });
 
     });
+    
+    
+    // ============================= DIRECTIVES ===============================
+    
+    app.directive('introduction', function() {
+        return {
+            restrict: 'AE',
+            templateUrl: 'directives/introduction.tpl.html',
+            replace: true
+        };
+    });
+    
+    app.directive('tabularOutput', function() {
+        return {
+            restrict: 'AE',
+            templateUrl: 'directives/tabular-output.tpl.html',
+            replace: true
+        };
+    });
+    
+    app.directive('jsonOutput', function() {
+        return {
+            restrict: 'AE',
+            templateUrl: 'directives/json-output.tpl.html',
+            replace: true
+        };
+    });
 
 
 })();
