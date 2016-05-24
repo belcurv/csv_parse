@@ -59,7 +59,7 @@
                                 <input type="range" id="sl1"
                                            class="mdl-slider date-slider"
                                            min="0" max="{{dateArray.length - 1}}" step="1"
-                                           value="0" ng-model="myDate">
+                                           ng-model="myDate">
                             </p>
                             <p>Showing: {{ (outputData|filter:dateArray[myDate]).length }} of {{ outputData.length }} total results:</p>
                             <table class="mdl-data-table mdl-js-data-table">
