@@ -17,7 +17,7 @@
                     <th>Annum</th>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="data in outputData | filter:dateArray[myDate] | orderBy:'source'">
+                    <tr ng-repeat="data in outputData | filter:dateArray[sliderIndex] | orderBy:'source'">
                         <td class="mdl-data-table__cell--non-numeric">{{data.source}}</td>
                         <td class="mdl-data-table__cell--non-numeric">{{data.target}}</td>
                         <td>{{data.value}}</td>

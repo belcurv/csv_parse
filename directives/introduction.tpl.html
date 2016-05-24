@@ -15,10 +15,10 @@
             <p>
                 <input type="range" id="sl1"
                            class="mdl-slider date-slider"
-                           min="0" max="{{dateArray.length - 1}}" step="1"
-                           ng-model="myDate">
+                           min="0" max="sliderIndexMax" step="1"
+                           ng-model="sliderIndex">
             </p>
-            <p>Showing: {{ (outputData|filter:dateArray[myDate]).length }} of {{ outputData.length }} total results:</p>
+            <p>Showing: {{ (outputData|filter:dateArray[sliderIndex]).length }} of {{ outputData.length }} total results:</p>
             <table class="mdl-data-table mdl-js-data-table">
                 <thead>
                     <th class="mdl-data-table__cell--non-numeric">Date index</th>
@@ -27,9 +27,9 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td class="mdl-data-table__cell--non-numeric">{{myDate}}</td>
-                        <td class="mdl-data-table__cell--non-numeric">{{dateArray[myDate]}}</td>
-                        <td class="mdl-data-table__cell--non-numeric">{{dateArray[myDate] | date}}</td>
+                        <td class="mdl-data-table__cell--non-numeric">{{sliderIndex}}</td>
+                        <td class="mdl-data-table__cell--non-numeric">{{dateArray[sliderIndex]}}</td>
+                        <td class="mdl-data-table__cell--non-numeric">{{dateArray[sliderIndex] | date}}</td>
                     </tr>
                 </tbody>
             </table>

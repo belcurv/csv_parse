@@ -34,8 +34,6 @@
 
         testFactory.getStuff().then(function (results) {
             
-            $scope.myDate = 0;
-            
             var i, j, k, l,
                 uniqueDates,
                 formattedResults = [];
@@ -82,10 +80,12 @@
 
 
             // ================== bind data to $scope object ==================
-            $scope.outputData = formattedResults;
-            $scope.dateArray  = uniqueDates;
-            $scope.minDate    = uniqueDates[0];
-            $scope.maxDate    = uniqueDates[uniqueDates.length - 1];
+            $scope.outputData     = formattedResults;
+            $scope.dateArray      = uniqueDates;
+            $scope.minDate        = uniqueDates[0];
+            $scope.maxDate        = uniqueDates[uniqueDates.length - 1];
+            $scope.sliderIndex    = 0;
+            $scope.sliderIndexMax = uniqueDates.length - 1;
             
         });
 
@@ -117,6 +117,5 @@
             replace: true
         };
     });
-
 
 })();
