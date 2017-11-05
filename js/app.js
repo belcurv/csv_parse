@@ -1,3 +1,9 @@
+/*
+    Notes on globals:
+    `angular` and Papa` are initialized into global namespace by <script> tags
+    in `index.html`  
+*/
+
 (function () {
     'use strict';
 
@@ -5,6 +11,7 @@
 
 
     // =============================== SERVICES ===============================
+    
     app.factory('testFactory', ['$http', '$q', function ($http, $q) {
 
         var url = 'data/data.csv',
@@ -12,13 +19,10 @@
             getStuff = function () {
                 return $http.get(url).then(function (data) {
                     return Papa.parse(data.data, {
-                        header: true,
-                        dynamicTyping: true,
-                        skipEmptyLines: true,
-                        complete: function (results) {
-                            // console.log('Papaparse results: ' + results.data);   // for testing
-                            return results.data;
-                        }
+                        header         : true,
+                        dynamicTyping  : true,
+                        skipEmptyLines : true,
+                        complete       : function (res) { return res.data; }
                     });
                 });
             };
@@ -34,60 +38,37 @@
 
         testFactory.getStuff().then(function (results) {
             
-            var i, j, k, l,
-                uniqueDates,
-                formattedResults = [];
-            
-        
-            // ==================== begin type conversion =====================
-            for (i = 0; i < results.data.length; i += 1) {
-                formattedResults.push({
-                    source : results.data[i].source,             // stay string
-                    target : results.data[i].target,             // stay string
-                    value  : +results.data[i].value,             // conv number
-                    annum  : Date.parse(results.data[i].annum)   // conv date
-                });
-            }
-            // ===================== end type conversion ======================
+            var formattedResults = [],
+                uniqueDates      = [];
 
+            // Format results data; coerce to different types
+            formattedResults = results.data.map(function (datum) {
+                return {
+                    source : datum.source,             // remains String
+                    target : datum.target,             // remains String
+                    value  : +datum.value,             // --> Number
+                    annum  : Date.parse(datum.annum)   // --> Date
+                };
+            });
 
-            // =============== begin build array of unique dates ==============
-            // add 'contains' method to Array prototype
-            Array.prototype.contains = function (v) {
-                for (j = 0; j < this.length; j += 1) {
-                    if (this[j] === v) {
-                        return true;
-                    }
-                }
-                return false;
-            };
-            
-            // add 'unique' method to Array prototype
-            Array.prototype.unique = function () {
-                var arr = [];
-                for (k = 0; k < this.length; k += 1) {
-                    if (!arr.contains(this[k].annum)) {
-                        arr.push(this[k].annum);
-                    }
-                }
-                return arr;
-            };
-            
-            // find unique dates within formattedResults array
+            // find unique dates within `formattedResults` array
             // and sort them, ascending
-            uniqueDates = formattedResults.unique().sort();
-            // ================ end build array of unique dates ===============
+            uniqueDates = formattedResults
+                .map(function (d) { return d.annum; })
+                .reduce(function (acc, el) {
+                    if (acc.indexOf(el) === -1) { acc.push(el); }
+                    return acc;
+                }, [])
+                .sort();
+            
 
-
-            // ================== bind data to $scope object ==================
+            // bind data to $scope
             $scope.outputData     = formattedResults;
             $scope.dateArray      = uniqueDates;
             $scope.minDate        = uniqueDates[0];
             $scope.maxDate        = uniqueDates[uniqueDates.length - 1];
             $scope.sliderIndex    = 0;
             $scope.sliderIndexMax = uniqueDates.length - 1;
-            
-            console.log('sliderIndexMax ' + $scope.sliderIndexMax);
             
         });
 
@@ -98,25 +79,25 @@
     
     app.directive('introduction', function() {
         return {
-            restrict: 'AE',
-            templateUrl: 'directives/introduction.tpl.html',
-            replace: true
+            restrict    : 'AE',
+            templateUrl : 'directives/introduction.tpl.html',
+            replace     : true
         };
     });
     
     app.directive('tabularOutput', function() {
         return {
-            restrict: 'AE',
-            templateUrl: 'directives/tabular-output.tpl.html',
-            replace: true
+            restrict    : 'AE',
+            templateUrl : 'directives/tabular-output.tpl.html',
+            replace     : true
         };
     });
     
     app.directive('jsonOutput', function() {
         return {
-            restrict: 'AE',
-            templateUrl: 'directives/json-output.tpl.html',
-            replace: true
+            restrict    : 'AE',
+            templateUrl : 'directives/json-output.tpl.html',
+            replace     : true
         };
     });
 

@@ -15,50 +15,49 @@
 
 <body ng-app="csvParse" ng-controller="csvParseController">
     
-<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
     
-    <!-- HEADER -->
-    <header class="mdl-layout__header">
-        <div class="mdl-layout__header-row">
-            <!-- Title -->
-            <span class="mdl-layout-title">
-                CSV Parse Playground
-            </span>
-            <!-- spacer right-aligns Nav controls -->
-            <div class="mdl-layout-spacer"></div>
-            <!-- Nav controls -->
-            <nav class="mdl-navigation">
-                <a class="mdl-navigation__link" href="#top">TOP</a>
-                <a class="mdl-navigation__link" href="#table">TABLE</a>
-                <a class="mdl-navigation__link" href="#json">JSON</a>
-            </nav>
-        </div>
-    </header>
-    
-    <!-- MAIN CONTENT -->
-    <main class="mdl-layout__content ">
-        <div class="page-content mdl-grid">
-                
-            <!-- INTRODUCTION -->
-            <introduction></introduction>
+        <!-- HEADER -->
+        <header class="mdl-layout__header">
+            <div class="mdl-layout__header-row">
+                <!-- Title -->
+                <span class="mdl-layout-title">
+                    CSV Parse Playground
+                </span>
+                <!-- spacer right-aligns Nav controls -->
+                <div class="mdl-layout-spacer"></div>
+                <!-- Nav controls -->
+                <nav class="mdl-navigation">
+                    <a class="mdl-navigation__link" href="#top">TOP</a>
+                    <a class="mdl-navigation__link" href="#table">TABLE</a>
+                    <a class="mdl-navigation__link" href="#json">JSON</a>
+                </nav>
+            </div>
+        </header>
+        
+        <!-- MAIN CONTENT -->
+        <main class="mdl-layout__content ">
+            <div class="page-content mdl-grid">
 
-            <!-- OUTPUT AS TABLE -->
-            <tabular-output></tabular-output>
+                <!-- INTRODUCTION -->
+                <introduction></introduction>
 
-            <!-- OUTPUT AS JSON -->
-            <json-output></json-output>
-                
-        </div>
-    </main>
+                <!-- OUTPUT AS TABLE -->
+                <tabular-output></tabular-output>
 
-</div>
+                <!-- OUTPUT AS JSON -->
+                <json-output></json-output>
 
-<!-- scripts -->
-<script src="js/vendor/angular.min.js  "></script>
-<script src="js/vendor/material.min.js "></script>
-<script src="http://d3js.org/d3.v2.js"></script>
-<script src="js/vendor/papaparse.min.js"></script>
-<script src="js/app.js                 "></script>
+            </div>
+        </main>
+
+    </div>
+
+    <!-- scripts -->
+    <script src="js/vendor/angular.min.js  "></script>
+    <script src="js/vendor/material.min.js "></script>
+    <script src="js/vendor/papaparse.min.js"></script>
+    <script src="js/app.js                 "></script>
 
 </body>
 </html>
